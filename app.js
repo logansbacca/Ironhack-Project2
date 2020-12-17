@@ -1,84 +1,32 @@
-var createError = require('http-errors');
 var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan')
-
-const MongoClient = require ("mongodb").MongoClient;
-const passport = require ("passport");
-const Strategy = require ("passport-local").Strategy;
-const authUtils = require ("./utils/auth");
-const session = require("express-session");
-const flash = require ("connect-flash");
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-
-// routes
-
 var app = express();
+var database = require("./src/config/db")
+// hbs setup
+database.on("connected", () =>  {
+  console.log("db connected")
+}) 
 
-//db connection
+database.on("disconnected", () =>  {
+  console.log("db disconnected")
+}) 
 
-MongoClient.connect('mongodb://localhost', (err, client) => {
-  if (err) {
-    console.log("error");
-  }
+database.on("error", (error) =>  {
+  console.log("error" + error)
+}) 
+//app.set('hbs');
 
-  const db = client.db('user-profiles');
-  const users = db.collection('users');
-  app.locals.users = users; 
+// Set partials for handlebars
+
+//hbs.registerPartials(path.join(__dirname, 'views/partials'));
+app.use(express.json());
+
+// catch 404 and forward to error handler
+app.use(function(req, res, next) {
+  next(createError(404));
 });
 
-//config passport
+app.listen('3000', function(){
+  console.log('Server running on port 3000!')
+})
 
-passport.use(new Strategy(
-    (username, passport, done) => {
-        app.locals.users.findOne({username}, (err, user) => {
-            if (err) {
-                return done(err);
-            }
-
-            if (!user) {
-                alert ("no user created")
-            }
-
-            if (user.passport != authUtils.hashpassword(password)) {
-                alert ("password not recognized")
-            }
-
-            return done (null, user);
-        });
-    }
-));
-
-passport.serializeUser((user, done) => {
-    done(null, user._id);
-  });
-  
-  passport.deserializeUser((id, done) => {
-    done(null, { id });
-  });
-
-//view engine setup
-
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'hbs');
-hbs.
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
-app.use(session({
-    secret: 'session secret',
-    resave: false,
-    saveUninitialized: false,
-  }));
-  
-  app.use(passport.initialize());
-  app.use(passport.session());
-  app.use(flash());
-  
-  app.use((req, res, next) => {
-    res.locals.loggedIn = req.isAuthenticated();
-  });
+module.exports = app;
