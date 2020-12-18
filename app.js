@@ -1,32 +1,16 @@
-var express = require('express');
-var app = express();
+const express = require('express');
+const app = express();
 var database = require("./src/config/db")
-// hbs setup
-database.on("connected", () =>  {
-  console.log("db connected")
-}) 
+const User = require("./src/user/user.model")
+const bodyParser = require('body-parser');
 
-database.on("disconnected", () =>  {
-  console.log("db disconnected")
-}) 
+app.use(bodyParser.json()); //
 
-database.on("error", (error) =>  {
-  console.log("error" + error)
-}) 
-//app.set('hbs');
 
-// Set partials for handlebars
-
-//hbs.registerPartials(path.join(__dirname, 'views/partials'));
-app.use(express.json());
-
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  next(createError(404));
-});
-
+require("./src/config/routes")(app)
 app.listen('3000', function(){
   console.log('Server running on port 3000!')
 })
 
-module.exports = app;
+
+
