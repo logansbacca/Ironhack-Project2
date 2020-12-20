@@ -13,4 +13,15 @@ app.listen('3000', function(){
 })
 
 
+database.on("connected", function () {
+  console.log("connected!");
+});
+
+database.on("disconnected", function () {
+  console.log("disconnected!");
+});
+
+database.on("error", function (error) {
+  console.log('Connection error: ' + error);
+});
 

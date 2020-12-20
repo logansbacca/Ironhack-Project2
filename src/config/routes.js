@@ -1,5 +1,4 @@
 //ROUTES
-
 var userRouter = require('../user/user.router');
 
 module.exports = (app) => {
