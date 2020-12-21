@@ -13,12 +13,10 @@ const UserSchema = new Schema ({
     email: {
         type: String,
         required: true,
-        unique: [true, "The password is required"],
+        unique: [true, "The email is required"],
     },
 });
 
 let User = mongoose.model("User", UserSchema);
 
 module.exports = User;
-
-const 
