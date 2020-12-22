@@ -1,7 +1,7 @@
 const mongoose = require ("mongoose")
 const Schema = mongoose.Schema;
 
-const workerSchema = new Schema ({
+const WorkerSchema = new Schema ({
     fristName:{
         type: String,
         required: [true, 'your name is required'],
@@ -18,7 +18,11 @@ const workerSchema = new Schema ({
         type: String,
         required:[true, 'profession required'],
     },
+    user: {
+        ref: 'User',
+        type: mongoose.Schema.Types.ObjectId
+    }
 });
 
-let Worker = mongoose.model("Worker", workerSchema)
-module.exports = User;
+let Worker = mongoose.model("Worker", WorkerSchema)
+module.exports = Worker;
