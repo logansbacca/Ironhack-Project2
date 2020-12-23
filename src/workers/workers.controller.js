@@ -4,7 +4,7 @@ var Worker = require('./workers.model');
 exports.getWorker = async (req,res) => {
     try {
         let workerId = req.params.id
-        let worker = await Worker.findById({_id : value})
+        let worker = await Worker.findById({_id : workerId})
         if(worker) {
             return res.status(202).json(worker)
         } else {

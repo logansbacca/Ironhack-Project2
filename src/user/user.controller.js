@@ -1,5 +1,8 @@
 const mongoose = require ("mongoose");
 var User = require('./user.model');
+var bcrypt = require ("bcrypt");
+var jwt = require ("jsonwebtoken");
+var config = require('../config/config')
 
 exports.getUser = async (req,res) =>{
     try{
@@ -58,3 +61,26 @@ exports.delete = async (req,res) =>{
         return res.status(400).send({message: error.message})
     }
 };
+
+function generateToken (params = {}) { 
+   return jwt.sign({params}, config.secret, {expiresIn: config.timer})
+};
+
+exports.loginUser = async (req,res) => {
+    try {
+        const email =  req.body.email;
+        const password = req.body.password;
+        const user = await User.findOne({email: email});
+        if (!user) {
+            return res.status(404).send({message:"user not found"});
+        }
+        if (!await bcrypt.compare(password, user.password)) {
+            return res.status(400).send({message:"invalid password"});
+        }
+        user.password = "";
+        return res.send({message: "login sucessful", data: user, token: generateToken({id: user._Id})})
+    } catch (error) {
+        return res.status(400).send({message: error.message})
+        
+    }
+}
