@@ -99,3 +99,21 @@ exports.loginUser = async (req,res) => {
         
     }
 }
+
+exports.getUsers = async (req, res) => {
+    try {
+        let user =  await User.find(
+            { userName: { '$regex': `.${req.query.userName}.`, '$options': 'i' }}
+        );
+
+        if(user) {
+            return res.status(202).json(user);
+        }else {
+            return res.status(400).json({message:'An error has occured.'});
+        }
+
+       
+    } catch (error) {
+        return res.status('400').send(error);
+    }
+};
