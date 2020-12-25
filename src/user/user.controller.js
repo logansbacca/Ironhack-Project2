@@ -17,6 +17,21 @@ exports.getUser = async (req,res) =>{
     }
 };
 
+exports.getUsers = async (req,res) => {
+    try {
+        let users = User.find({})
+        if (users) {
+            return res.status(202).json({message: 'user found'})
+        } else {
+            return res.status(404).json({message: "user not found"})
+        }
+
+    } catch (error) {
+        return res.status(400).send({message: "user not found"})
+    }
+}
+
+
 exports.createUser = async (req,res) => {
     try{
         var user =  req.body;
