@@ -77,8 +77,12 @@ exports.delete = async (req,res) =>{
     }
 };
 
+const accessToken = generateToken (user)
+const refreshToken = jwt.sign(user, process.env.REFRESH_TOKEN_SECRET)
+res.json({accessToken : acessToken, refreshToken: refreshToken})
+
 function generateToken (params = {}) { 
-   return jwt.sign({params}, config.secret, {expiresIn: config.timer})
+   return jwt.sign({params}, config.secret, {expiresIn: '15s'})
 };
 
 exports.loginUser = async (req,res) => {
@@ -100,20 +104,17 @@ exports.loginUser = async (req,res) => {
     }
 }
 
-exports.getUsers = async (req, res) => {
+exports.logoutUser = async (req,res) => {
     try {
-        let user =  await User.find(
-            { userName: { '$regex': `.${req.query.userName}.`, '$options': 'i' }}
-        );
-
-        if(user) {
-            return res.status(202).json(user);
-        }else {
-            return res.status(400).json({message:'An error has occured.'});
+        const {refreshToken} = req.body
+        if (!refreshToken) {
+            return res.status(400).send({message: "An error has occured"})
+            const userId = await verifyRefreshToken(refreshToken)
+            User.deleteOne(userId)
         }
-
-       
+        
     } catch (error) {
-        return res.status('400').send(error);
+        return res.status(400).send({message: error.message})
     }
-};
+
+}

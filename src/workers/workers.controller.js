@@ -75,3 +75,21 @@ exports.updateWorker = async (req,res) => {
         return res.status(400).send({message: error.message})
     }
 };
+
+exports.getWorkers= async (req, res) => {
+    try {
+        let worker=  await Worker.find(
+            { profession: { '$regex': `.${req.query.profession}.`, '$options': 'i' }}
+        );
+
+        if(worker) {
+            return res.status(202).json(worker);
+        }else {
+            return res.status(400).json({message:'An error has occured.'});
+        }
+
+       
+    } catch (error) {
+        return res.status('400').send(error);
+    }
+};
