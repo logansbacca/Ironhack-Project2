@@ -77,10 +77,6 @@ exports.delete = async (req,res) =>{
     }
 };
 
-const accessToken = generateToken (user)
-const refreshToken = jwt.sign(user, process.env.REFRESH_TOKEN_SECRET)
-res.json({accessToken : acessToken, refreshToken: refreshToken})
-
 function generateToken (params = {}) { 
    return jwt.sign({params}, config.secret, {expiresIn: '15s'})
 };
@@ -106,15 +102,16 @@ exports.loginUser = async (req,res) => {
 
 exports.logoutUser = async (req,res) => {
     try {
-        const {refreshToken} = req.body
-        if (!refreshToken) {
-            return res.status(400).send({message: "An error has occured"})
-            const userId = await verifyRefreshToken(refreshToken)
-            User.deleteOne(userId)
+        const email =  req.body.email;
+        const user = await User.findOne({email: email});
+        if (!user) {
+            return res.status(404).send({message:"user not found"});
         }
-        
+        //jwt.destroy(req.params.token)
+        //generateToken({id: user._Id})
+        return res.send({message: "logout"})
     } catch (error) {
         return res.status(400).send({message: error.message})
+        
     }
-
 }
