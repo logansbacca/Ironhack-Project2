@@ -10,6 +10,11 @@ module.exports = (app) => {
         res.send("welcome to our api")
     });
 
+    app.get( '/user/login', async ( req, res ) => {
+        res.render( 'login' );  
+    } );
+
 }
+
 
 
