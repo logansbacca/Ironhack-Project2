@@ -19,15 +19,15 @@ exports.getWorker = async (req,res) => {
 
 exports.getWorkers = async (req,res) => {
     try {
-        let workers = Worker.find({})
+        let workers = await Worker.find({})
         if (workers) {
-            return res.status(202).json({message: 'user found'})
+            return res.status(202).json(workers)
         } else {
-            return res.status(404).json({message: "user not found"})
+            return res.status(404).json({message: "not found"})
         }
 
     } catch (error) {
-        return res.status(400).send({message: "user not found"})
+        return res.status(400).send({message: "not found"})
     }
 }
 

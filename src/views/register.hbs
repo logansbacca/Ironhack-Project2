@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <nav>
-    <h1> <FreelanceHire</h1>
+    <h1> <FreelanceHire> </h1>
     <ul>
         <li><a href="javascript:;" onclick="logout()">Log out </a></li>
         <li><a href="/user/login">Log in </a></li>
@@ -32,15 +32,14 @@
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify( {
-                userName: document.querySelector( 'input[name="userName"]' ).value
-                password: document.querySelector( 'input[name="password"]' ).value
-                email: document.querySelector( 'input[name="email"]' ).value, 
+                userName: document.querySelector( 'input[name="username"]' ).value,
+                password: document.querySelector( 'input[name="password"]' ).value,
+                email: document.querySelector( 'input[name="email"]' ).value
             } )        
         } ).then( async res => {
             res = await res.json();
             console.log(res)
-            localStorage.setItem("token" ,res.token)
-            window.location.href = "user/login";
+            window.location.href = "/user/login";
             console.log('User registered!');
         }, err => {
             console.log("error: "+ err)

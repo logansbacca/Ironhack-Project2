@@ -1,6 +1,7 @@
 //ROUTES
 var userRouter = require('../user/user.router');
 var workerRouter = require('../workers/workers.router');
+var Worker = require('../workers/workers.model');
 
 module.exports = (app) => {
 
@@ -14,8 +15,14 @@ module.exports = (app) => {
     
     
     app.get( '/hirenow', async ( req, res ) => {
-        res.render('hirenow')
-    } );
+
+        try{
+            const workers = await Worker.find();
+            res.render("hirenow", {workers})
+          }catch(e){
+            console.error(e)
+        }     
+    });
 
     app.use('/api/user', userRouter); 
     app.use('/api/workers', workerRouter); 

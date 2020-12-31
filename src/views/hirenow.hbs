@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <nav>
-    <h1> <FreelanceHire</h1>
+    <h1> <FreelanceHire> </h1>
     <ul>
         <li><a href="javascript:;" onclick="logout()">Log out </a></li>
         <li><a href="/user/login">Log in </a></li>
@@ -8,19 +8,25 @@
         <li><a href="javascript:;" onclick="hireNow()"> Hire now!</a></li>
     </ul>
 </nav>
+
 <h1> Here is a list of our Freelanceres:</h1>
 
 
 
+{{#each workers}}
+    <h3>{{firstName}}</h3>
+    <p>{{lastName}}</p>
+    <p>{{email}}</p>
+    <p>{{profession}}</p>
+    <hr>
+{{/each}}
 
 
 <script>
- 
 
-          function logout() {
+    function logout() {
         localStorage.setItem('token', '');
         window.location.href = "/user/login";
-    }
+    }  
 
-  
 </script>
