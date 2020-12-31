@@ -76,7 +76,7 @@ exports.updateWorker = async (req,res) => {
     }
 };
 
-exports.getWorkers= async (req, res) => {
+exports.filterWorkers= async (req, res) => {
     try {
         let worker=  await Worker.find(
             { profession: { '$regex': `.${req.query.profession}.`, '$options': 'i' }}

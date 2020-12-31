@@ -1,10 +1,10 @@
 <nav>
-    <h1> <a href='/'> FreelanceHire</a></h1>
+    <h1> <FreelanceHire</h1>
     <ul>
-        <li><a href= "/user/logout">Log out </a></li>
+        <li><a href="javascript:;" onclick="logout()">Log out </a></li>
         <li><a href="/user/login">Log in </a></li>
-        <li><a href="/user/register" class="btn">Sign up</a></li>
-        <li><a href="/workers/freelancers"> Hire now!</li>
+        <li><a href="javascript:;" onclick="register()">Register</a></li>
+        <li><a href="javascript:;" onclick="hireNow()"> Hire now!</a></li>
     </ul>
 </nav>
 
@@ -14,13 +14,35 @@
     <form method="post">
         <p><input type="text" name="email" placeholder="Email"></p>
         <p><input type="password" name="password" placeholder="Password"></p>
-        <p><input type="submit" value="Login"></p>
+        <p><button type="submit">Submit</button></p>
     </form>
 </div>
 
 <script>
+
+    function logout() {
+        localStorage.setItem('token', '');
+        window.location.href = "/user/login";
+    }
+
+    function hireNow() {
+       let hasToken = localStorage.getItem('token'); 
+        if (hasToken) {
+             window.location.href = "/hirenow";
+        }
+        else {
+            alert("Authorization Denied, please Log In!")
+        }
+
+    }
+
+        function register() {
+             window.location.href = "/user/registration";
+        }
+        
+
     document.addEventListener( 'submit', ( e ) => {
-        e.preventDefault();
+        e.preventDefault()
     
         fetch( '/api/user/login', {
             method: 'POST',
@@ -32,11 +54,16 @@
                 password: document.querySelector( 'input[name="password"]' ).value
             } )        
         } ).then( async res => {
-            var data = await res.json();
-            
+            res = await res.json();
+            console.log(res)
+            localStorage.setItem("token" ,res.token)
+            window.location.href = "/hirenow";
             console.log('User logged!');
-        } );
+        }, err => {
+            console.log("error: "+ err)
+        });
     } );
+
 </script>
 
  

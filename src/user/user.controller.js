@@ -8,26 +8,26 @@ exports.getUser = async (req,res) =>{
     try{
         let user= await User.findById({_id: req.params.id});
         if (user) {
-            return res.status(202).json(user);
+            return res.status(202).send(user);
         } else {
             return res.status(400).json({message:"an error has occured."});
         }
     } catch(error) {
-        return res.status(400).send({message:"user not found"});
+        return res.status(400).send({message: error.message});
     }
 };
 
 exports.getUsers = async (req,res) => {
     try {
-        let users = User.find({})
+        let users = await User.find({})
         if (users) {
-            return res.status(202).json({message: 'user found'})
+            return res.status(202).send(users);
         } else {
             return res.status(404).json({message: "user not found"})
         }
 
     } catch (error) {
-        return res.status(400).send({message: "user not found"})
+        return res.status(400).send({message: error.message})
     }
 }
 

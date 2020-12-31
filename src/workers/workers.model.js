@@ -1,8 +1,8 @@
-const mongoose = require ("mongoose")
+const mongoose = require("mongoose")
 const Schema = mongoose.Schema;
 
 const WorkerSchema = new Schema ({
-    fristName:{
+    firstName:{
         type: String,
         required: [true, 'your name is required'],
     },

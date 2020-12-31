@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<nav>
+    <h1> <FreelanceHire</h1>
+    <ul>
+        <li><a href="javascript:;" onclick="logout()">Log out </a></li>
+        <li><a href="/user/login">Log in </a></li>
+        <li><a href="javascript:;" onclick="register()">Register</a></li>
+        <li><a href="javascript:;" onclick="hireNow()"> Hire now!</a></li>
+    </ul>
+</nav>
+<h1> Register as a new user</h1>
+
+<div style="width: 600px; margin: 0px auto;">
+    <h2>Register</h2>
+ 
+    <form method="post">
+        <p><input type="text" name="username" placeholder="Username"></p>
+        <p><input type="text" name="email" placeholder="Email"></p>
+        <p><input type="password" name="password" placeholder="Password"></p>
+        <p><button type="submit">Submit</button></p>
+    </form>
+
+
+</div>
+    <script>
+
+  document.addEventListener( 'submit', ( e ) => {
+        e.preventDefault() 
+        fetch( '/api/user/register', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify( {
+                userName: document.querySelector( 'input[name="userName"]' ).value
+                password: document.querySelector( 'input[name="password"]' ).value
+                email: document.querySelector( 'input[name="email"]' ).value, 
+            } )        
+        } ).then( async res => {
+            res = await res.json();
+            console.log(res)
+            localStorage.setItem("token" ,res.token)
+            window.location.href = "user/login";
+            console.log('User registered!');
+        }, err => {
+            console.log("error: "+ err)
+        });
+    } );
+
+
+
+
+</script>

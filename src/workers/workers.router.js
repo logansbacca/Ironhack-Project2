@@ -4,7 +4,7 @@ var router = express.Router();
 const workersController = require ('./workers.controller');
 
 router.get('/:id', workersController.getWorker);
-router.get('/freelancers'. workersController.getWorkers);
+router.get('/find', workersController.getWorkers);
 router.post('/', workersController.createWorker);
 router.put('/:id', workersController.updateWorker);
 router.delete('/:id', workersController.deleteWorker);
