@@ -2,6 +2,7 @@
 var userRouter = require('../user/user.router');
 var workerRouter = require('../workers/workers.router');
 var Worker = require('../workers/workers.model');
+var User = require ('../user/user.model');
 
 module.exports = (app) => {
 
@@ -22,6 +23,16 @@ module.exports = (app) => {
           }catch(e){
             console.error(e)
         }     
+    });
+
+    app.get('/user/profile/:id', async (req, res) => {
+        try{
+            const user = await User.findById({_id: req.params.id});
+            res.render("user", {user})
+          }catch(e){
+            console.error(e)
+
+        }
     });
 
     app.use('/api/user', userRouter); 

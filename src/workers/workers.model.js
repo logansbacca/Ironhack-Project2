@@ -21,6 +21,11 @@ const WorkerSchema = new Schema ({
     user: {
         ref: 'User',
         type: mongoose.Schema.Types.ObjectId
+    },
+
+    linkedin: {
+        type: String,
+        required:false
     }
 });
 

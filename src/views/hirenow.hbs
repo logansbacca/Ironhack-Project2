@@ -6,6 +6,7 @@
         <li><a href="/user/login">Log in </a></li>
         <li><a href="javascript:;" onclick="register()">Register</a></li>
         <li><a href="javascript:;" onclick="hireNow()"> Hire now!</a></li>
+        <li><a href="/user/profile/" id="account"> Account</a></li>
     </ul>
 </nav>
 
@@ -18,11 +19,15 @@
     <p>{{lastName}}</p>
     <p>{{email}}</p>
     <p>{{profession}}</p>
+    <a href="{{linkedin}}" target="_blank">Linkedin</a>
     <hr>
 {{/each}}
 
 
 <script>
+
+    let url = '/user/profile/' + localStorage.getItem('userId');
+    document.getElementById("account").setAttribute('href', url);
 
     function logout() {
         localStorage.setItem('token', '');

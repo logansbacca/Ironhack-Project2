@@ -52,6 +52,7 @@ exports.updateUser = async (req,res) => {
     try{
         const userId = req.params.id;
         const user = req.body;
+        user.password = await bcrypt.hashSync(user.password, bcrypt.genSaltSync(10))
         const userUpdated = await User.findByIdAndUpdate(mongoose.Types.ObjectId(userId), {$set: user}, {new:true}); 
         if(userUpdated) {
             return res.status(202).send({message:"updated"})
