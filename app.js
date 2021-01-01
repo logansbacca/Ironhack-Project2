@@ -7,14 +7,9 @@ const path = require("path")
 
 app.use(bodyParser.json());
 
-
-// Set view engine is hbs
-app.set( 'view engine', 'hbs' );
-// By default, hbs templates are located in Views folder, we use Templates folder instead, that's why we need this line
+//view enginer setup
 app.set( 'views', path.join( __dirname, 'src/views' ) );
-// Set location for statis resources
-app.use( express.static( path.join( __dirname, 'assets' ) ) );
-
+app.set( 'view engine', 'hbs' );
 
 database.on("connected", function () {
   console.log("connected!");
