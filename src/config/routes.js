@@ -35,6 +35,11 @@ module.exports = (app) => {
         }
     });
 
+    app.get("/homepage", (req,res) => {
+        res.render("homepage")
+    });
+
+
     app.use('/api/user', userRouter); 
     app.use('/api/workers', workerRouter); 
 

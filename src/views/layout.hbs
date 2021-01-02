@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <!--<link rel="stylesheet" href="../public/style.css"-->
+
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="/user/login">FreelanceHire</a>
+      <a class="navbar-brand" href="/homepage">FreelanceHire</a>
     </div>
     <ul class="nav navbar-nav">
         <li><a class="navbar-brand" href="javascript:;" onclick="register()">Register</a></li>
@@ -20,9 +22,37 @@
     
   <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+ 
 
   </head>
   <body class="container">
     {{{body}}}
   </body>
 </html>
+
+<script>
+
+    function logout() {
+        localStorage.setItem('token', '');
+        window.location.href = "/user/login";
+    }
+
+    function hireNow() {
+       let hasToken = localStorage.getItem('token'); 
+        if (hasToken) {
+             window.location.href = "/hirenow";
+        }
+        else {
+            alert("Authorization Denied, please Log In!")
+        }
+
+    }
+
+        function register() {
+             window.location.href = "/user/registration";
+        }
+        
+
+
+
+</script>
