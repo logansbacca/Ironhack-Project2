@@ -1,5 +1,5 @@
 var config = {  
-    port: 4004,
+    port: 4000,
     host: 'localhost',
     env: 'development',
     "secret": "49fb775afa045a8d97a4ddba26c725cb",
