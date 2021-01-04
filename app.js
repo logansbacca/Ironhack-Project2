@@ -13,8 +13,9 @@ app.set( 'views', path.join( __dirname, 'src/views' ) );
 app.set( 'view engine', 'hbs' );
 
 
-
 require("./src/config/routes")(app)
 
-
+app.listen(process.env.PORT, () => {
+    console.log("App running on port" + process.env.PORT)
+})
 
