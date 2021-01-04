@@ -4,6 +4,7 @@ var database = require("./src/config/db")
 const User = require("./src/user/user.model")
 const bodyParser = require('body-parser');
 const path = require("path")
+var config = require('./src/config/config')
 
 app.use(bodyParser.json());
 
@@ -11,22 +12,9 @@ app.use(bodyParser.json());
 app.set( 'views', path.join( __dirname, 'src/views' ) );
 app.set( 'view engine', 'hbs' );
 
-database.on("connected", function () {
-  console.log("connected!");
-});
 
-database.on("disconnected", function () {
-  console.log("disconnected!");
-});
-
-database.on("error", function (error) {
-  console.log('Connection error: ' + error);
-});
 
 require("./src/config/routes")(app)
 
 
-app.listen('4000', function(){
-  console.log('Server running on port 4000!')
-})
 

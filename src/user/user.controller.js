@@ -108,8 +108,6 @@ exports.logoutUser = async (req,res) => {
         if (!user) {
             return res.status(404).send({message:"user not found"});
         }
-        //jwt.destroy(req.params.token)
-        //generateToken({id: user._Id})
         return res.send({message: "logout"})
     } catch (error) {
         return res.status(400).send({message: error.message})

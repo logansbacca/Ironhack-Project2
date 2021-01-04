@@ -1,5 +1,12 @@
 const mongoose = require ("mongoose")
-mongoose.connect("mongodb://localhost:27017/project-two",{useNewUrlParser:true});
-mongoose.set("useCreateIndex", true)
+mongoose.connect(
+    "mongodb+srv://loganbacca:12345@project2.1jjte.mongodb.net/project2>?retryWrites=true&w=majority",
+    {
+        useNewUrlParser:true
+    }
+    )
+    .then (() => {
+        console.log ("mongodb connected")
 
-module.exports = mongoose.connection;
+});
+
