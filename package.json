@@ -4,7 +4,6 @@
   "description": "This is the second project for the Ironhack Web Development Bootcamp.",
   "main": "app.js",
   "scripts": {
-    "start" : "npm start"
   },
   "repository": {
     "type": "git",
