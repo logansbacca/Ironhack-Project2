@@ -5,10 +5,11 @@ const workersController = require ('./workers.controller');
 
 router.get('/find', workersController.getWorkers);
 router.get('/:id', workersController.getWorker);
+router.get('/filter', workersController.filterWorkers);
 router.post('/', workersController.createWorker);
 router.put('/:id', workersController.updateWorker);
 router.delete('/:id', workersController.deleteWorker);
-router.get('/filter', workersController.filterWorkers);
+
 
 module.exports = router;
 
