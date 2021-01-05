@@ -1,27 +1,35 @@
-<h2>Edit your profile</h2>
-<form action="/users" method="POST">
-  <div class="form-group">
-    <label for="userName">Username</label>
-    <input type="text" class="form-control" name="userName" id="userName" value="{{ user.userName }}">
-  </div>
-
-  <div class="form-group">
-    <label for="name">Email</label>
-    <input type="text" class="form-control" name="email" id="email" value="{{ user.email }}">
-  </div>
-
-  <div class="form-group">
-    <label for="name">Password</label>
-    <input type="text" class="form-control" name="password" id="password" >
-
-    </form> 
-    
-  </div>
-
-  <button class="btn btn-primary" type="submit">Update</button>
-
-
-<button class="btn btn-primary" onclick="deleteaccount()">Delete Account</button>
+<div class="container text-center mt-4" >
+        <form class="shadow form-signin align-middle rounded bg-white" style=" width: 100%;max-width: 400px;padding: 15px;margin: 0 auto;" action="/users" method="post">
+            <h2 class="h3 mb-3 font-weight-normal">Edit your profile</h2>
+            <label class="label" for="userName">Username</label>
+            <input type="text" name="username" class="form-control" id="userName" value="{{ user.userName }}">
+            <label class="label" for="name">Email</label>
+            <input type="email" name="email" class="form-control" id="email" value="{{ user.email }}">
+            <label class="label" for="name">Password</label>
+            <input type="password" name="password" class="form-control" name="password" id="password">
+            
+            <p><button class="btn btn-primary btn-block btn-submit btn-submit2"  type="submit">Update</button></p>
+            <button class="btn btn-danger btn-block btn-submit" onclick="deleteaccount()">Delete Account</button>
+        </form>
+    </div>
+    <style>
+        #labelUser{
+            margin-top: 20px;
+        }
+        .form-control{
+            font-size: 16px;
+            padding: 10px;
+        }
+        .btn-submit{
+            padding: .5rem 1rem;
+            font-size: 1.25rem;
+            line-height: 1.5;
+            width: 100%;
+        }
+        .btn-submit2{
+            margin-top: 40px;
+        }
+    </style>
 
 <script>
 
