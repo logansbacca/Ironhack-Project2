@@ -1,22 +1,28 @@
+<div class="container">
+        <h1> Here is a list of our Freelanceres:</h1>
 
-<h1> Here is a list of our Freelanceres:</h1>
+        {{#each workers}}
+        <div class="card" style="width: 18rem;">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item"><h3>{{firstName}}</h3></li>
+              <li class="list-group-item"><p>{{lastName}}</p></li>
+              <li class="list-group-item"><p>{{email}}</p></li>
+              <li class="list-group-item"><p>{{profession}}</p></li>
+              <li class="list-group-item"><a href="{{linkedin}}" target="_blank">Linkedin</a></li>
+            </ul>
+          </div>   
+        <hr>
+        {{/each}}
 
-{{#each workers}}
-    <h3>{{firstName}}</h3>
-    <p>{{lastName}}</p>
-    <p>{{email}}</p>
-    <p>{{profession}}</p>
-    <a href="{{linkedin}}" target="_blank">Linkedin</a>
-    <hr>
-{{/each}}
-<script>
-
-    let url = '/user/profile/' + localStorage.getItem('userId');
-    document.getElementById("account").setAttribute('href', url);
-
-    function logout() {
-        localStorage.setItem('token', '');
-        window.location.href = "/user/login";
-    }  
-
-</script>
+    </div>
+        <script>
+        
+            let url = '/user/profile/' + localStorage.getItem('userId');
+            document.getElementById("account").setAttribute('href', url);
+        
+            function logout() {
+                localStorage.setItem('token', '');
+                window.location.href = "/user/login";
+            }  
+        
+        </script>
