@@ -2,7 +2,7 @@
         <h1 class="mb-4"> Here is a list of our Freelanceres:</h1>
 
         {{#each workers}}
-        <div class="card" style="width: 18rem;">
+        <div class="card" style="width: 18rem; float:left;">
             <ul class="list-group list-group-flush">
               <li class="list-group-item"><h3>{{firstName}}</h3></li>
               <li class="list-group-item"><p>{{lastName}}</p></li>
@@ -11,7 +11,7 @@
               <li class="list-group-item"><a href="{{linkedin}}" target="_blank">Linkedin</a></li>
             </ul>
           </div>   
-        <hr>
+        
         {{/each}}
 
     </div>
