@@ -1,65 +1,81 @@
-
-<div class="container" style="width: 600px; margin: 0px auto;">
-    <h2>Please sign in</h2>
-    <form method="post">
-        <p><input class="input-xlarge" type="text" name="email" placeholder="Email"></p>
-        <p><input class="input-xlarge" type="password" name="password" placeholder="Password"></p>
-        <p><button class="input-xlarge"  type="submit">Submit</button></p>
-    </form>
-</div>
-
-<script>
-
-    function logout() {
-        localStorage.setItem('token', '');
-        window.location.href = "/user/login";
-    }
-
-    function hireNow() {
-       let hasToken = localStorage.getItem('token'); 
-        if (hasToken) {
-             window.location.href = "/hirenow";
+<div class="container text-center mt-4" >
+        <form class="shadow form-signin align-middle rounded bg-white" style=" width: 100%;max-width: 400px;padding: 15px;margin: 0 auto;" method="post">
+            <h2 class="h3 mb-3 font-weight-normal">Please sign in</h2>
+            <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="">
+            <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
+            
+            <p><button class="btn btn-primary btn-block btn-submit"  type="submit">Submit</button></p>
+        </form>
+    </div>
+    <style>
+        #inputEmail{
+            margin-top: 30px;
         }
-        else {
-            alert("Authorization Denied, please Log In!")
+        .form-control{
+            font-size: 16px;
+            padding: 10px;
         }
-
-    }
-
-        function register() {
-             window.location.href = "/user/registration";
+        .btn-submit{
+            padding: .5rem 1rem;
+            font-size: 1.25rem;
+            line-height: 1.5;
+            width: 100%;
+            margin-top: 40px;
         }
-        
-
-    document.addEventListener( 'submit', ( e ) => {
-        e.preventDefault()
+    </style>
     
-        fetch( '/api/user/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify( {
-                email: document.querySelector( 'input[name="email"]' ).value,
-                password: document.querySelector( 'input[name="password"]' ).value
-            } )        
-        } ).then( async res => {
-            res = await res.json();
-            console.log(res)
-            if(!res.token) {
-               alert('User not found!')
-            }else {
-                localStorage.setItem("token" ,res.token)
-                localStorage.setItem("userId" ,res.data._id)
-                window.location.href = "/hirenow";
-                console.log('User logged!');
+    <script>
+    
+        function logout() {
+            localStorage.setItem('token', '');
+            window.location.href = "/user/login";
+        }
+    
+        function hireNow() {
+           let hasToken = localStorage.getItem('token'); 
+            if (hasToken) {
+                 window.location.href = "/hirenow";
             }
-        }, err => {
-            console.log("error: "+ err)
-        });
-    } );
-
-</script>
+            else {
+                alert("Authorization Denied, please Log In!")
+            }
+    
+        }
+    
+            function register() {
+                 window.location.href = "/user/registration";
+            }
+            
+    
+        document.addEventListener( 'submit', ( e ) => {
+            e.preventDefault()
+        
+            fetch( '/api/user/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify( {
+                    email: document.querySelector( 'input[name="email"]' ).value,
+                    password: document.querySelector( 'input[name="password"]' ).value
+                } )        
+            } ).then( async res => {
+                res = await res.json();
+                console.log(res)
+                if(!res.token) {
+                   alert('User not found!')
+                }else {
+                    localStorage.setItem("token" ,res.token)
+                    localStorage.setItem("userId" ,res.data._id)
+                    window.location.href = "/hirenow";
+                    console.log('User logged!');
+                }
+            }, err => {
+                console.log("error: "+ err)
+            });
+        } );
+    
+    </script>
 </body>
 </html>
  
