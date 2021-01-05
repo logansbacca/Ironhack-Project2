@@ -2,28 +2,40 @@
 <html>
   <head>
 
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
 
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="/homepage">FreelanceHire</a>
-    </div>
-    <ul class="nav navbar-nav">
-       <li><a class="navbar-brand" href="../user/profile/" id="account"> Account</a></li>
-        <li><a class="navbar-brand" href="javascript:;" onclick="register()">Register</a></li>
-        <li><a class="navbar-brand" href="javascript:;" onclick="hireNow()"> Search Freelancers</a></li>
-          <li><a class="navbar-brand" href="/user/login">Log in </a></li>
-         <li class = "navbar-brand" href="javascript:;" onclick="logout()">Log out </a></li>
-          
-    </ul>
-  </div>
-</nav>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3">
+        <a class="navbar-brand" href="/homepage">FreelanceHire</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="../user/profile/" id="account">Account</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="javascript:;" onclick="register()">Register</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="javascript:;" onclick="hireNow()">Search Freelancers</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/user/login">Log in</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" href="javascript:;" onclick="logout()">Log out</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      
+  </head>
 
     <title>{{title}}</title>
     
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
 
-  </head>
   <body class="container">
     {{{body}}}
   </body>
