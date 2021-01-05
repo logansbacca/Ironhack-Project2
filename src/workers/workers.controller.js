@@ -78,10 +78,16 @@ exports.updateWorker = async (req,res) => {
 
 exports.filterWorkers= async (req, res) => {
     try {
+        console.log("....");
+        console.log(req.query.profession);
+        
         let worker=  await Worker.find(
-            { profession: { '$regex': `.${req.query.profession}.`, '$options': 'i' }}
+            { profession: req.query.profession }
         );
 
+        // let worker=  await Worker.find(
+        //     { profession: { '$regex': `.${req.query.profession}.`, '$options': 'i' }}
+        // );
         if(worker) {
             return res.status(202).json(worker);
         }else {
