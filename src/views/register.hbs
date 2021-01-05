@@ -1,17 +1,30 @@
-
-
-<div style="width: 600px; margin: 0px auto;">
-    <h2>Register</h2>
- 
-    <form method="post">
-        <p><input type="text" name="username" placeholder="Username"></p>
-        <p><input type="text" name="email" placeholder="Email"></p>
-        <p><input type="password" name="password" placeholder="Password"></p>
-        <p><button type="submit">Submit</button></p>
-    </form>
-
-
-</div>
+<div class="container text-center mt-4" >
+        <form class="shadow form-signin align-middle rounded bg-white" style=" width: 100%;max-width: 400px;padding: 15px;margin: 0 auto;" method="post">
+            <h2 class="h3 mb-3 font-weight-normal">Register</h2>
+            <input type="text" name="username" id="inputUser" class="form-control" placeholder="Username" required="" autofocus="">
+            <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email address" required>
+            <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
+            
+            <p><button class="btn btn-primary btn-block btn-submit"  type="submit">Submit</button></p>
+        </form>
+    </div>
+    <style>
+        #inputUser{
+            margin-top: 30px;
+        }
+        .form-control{
+            font-size: 16px;
+            padding: 10px;
+        }
+        .btn-submit{
+            padding: .5rem 1rem;
+            font-size: 1.25rem;
+            line-height: 1.5;
+            width: 100%;
+            margin-top: 40px;
+        }
+    </style>
+    
 <script>
 
   document.addEventListener( 'submit', ( e ) => {
@@ -35,8 +48,5 @@
             console.log("error: "+ err)
         });
     } );
-
-
-
 
 </script>
