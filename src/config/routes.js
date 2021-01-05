@@ -35,7 +35,7 @@ module.exports = (app) => {
         }
     });
 
-    app.get("/homepage", (req,res) => {
+    app.get("/", (req,res) => {
         res.render("homepage")
     });
 
@@ -43,9 +43,7 @@ module.exports = (app) => {
     app.use('/api/user', userRouter); 
     app.use('/api/workers', workerRouter); 
 
-    app.get("/", (req,res) => {
-        res.send("welcome to our api")
-    });
+
 
 
 
