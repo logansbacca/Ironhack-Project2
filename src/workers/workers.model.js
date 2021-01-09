@@ -20,7 +20,8 @@ const WorkerSchema = new Schema ({
     },
     user: {
         ref: 'User',
-        type: mongoose.Schema.Types.ObjectId
+        type: mongoose.Schema.Types.ObjectId,
+        required:false,
     },
 
     linkedin: {

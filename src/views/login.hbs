@@ -28,13 +28,15 @@
     
         function logout() {
             localStorage.setItem('token', '');
+            localStorage.setItem('userId', '');
+            localStorage.setItem('isAdmin', '');
             window.location.href = "/user/login";
         }
     
         function hireNow() {
-           let hasToken = localStorage.getItem('token'); 
-            if (hasToken) {
-                 window.location.href = "/hirenow";
+           let token = localStorage.getItem('token'); 
+            if (token) {
+                 window.location.href = "/hirenow?token="+token;
             }
             else {
                 alert("Authorization Denied, please Log In!")
@@ -65,9 +67,10 @@
                 if(!res.token) {
                    alert('User not found!')
                 }else {
-                    localStorage.setItem("token" ,res.token)
-                    localStorage.setItem("userId" ,res.data._id)
-                    window.location.href = "/hirenow";
+                    localStorage.setItem("token" ,res.token);
+                    localStorage.setItem("isAdmin" ,res.data.admin)
+                    localStorage.setItem("userId" ,res.data._id);
+                    window.location.href = "/hirenow?token="+ localStorage.getItem('token');
                     console.log('User logged!');
                 }
             }, err => {

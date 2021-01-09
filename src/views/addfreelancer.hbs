@@ -1,0 +1,78 @@
+<div class="container text-center mt-4" >
+        <form class="shadow form-signin align-middle rounded bg-white" style=" width: 100%;max-width: 400px;padding: 15px;margin: 0 auto;" method="post">
+            <h2 class="h3 mb-3 font-weight-normal">Add new freelancer</h2>
+
+            
+            <input type="text" name="firstName" id="inputUser" class="form-control" placeholder="First name" required="" autofocus="">
+            <input type="text" name="lastName" id="inputUser" class="form-control" placeholder="Last name" required="" autofocus="">
+            <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email address" required>
+            <input type="text" name="profession" id="inputUser" class="form-control" placeholder="Profession" required="" autofocus="">
+            <input type="text" name="linkedin" id="inputUser" class="form-control" placeholder="Linkedin" required="" autofocus="">
+            
+            
+            
+            <p><button class="btn btn-primary btn-block btn-submit"  type="submit">Submit</button></p>
+        </form>
+    </div>
+    <style>
+        #inputUser{
+            margin-top: 30px;
+        }
+        #inputEmail{
+            margin-top: 30px;
+        }
+        .form-control{
+            font-size: 16px;
+            padding: 10px;
+        }
+        .btn-submit{
+            padding: .5rem 1rem;
+            font-size: 1.25rem;
+            line-height: 1.5;
+            width: 100%;
+            margin-top: 40px;
+        }
+    </style>
+    
+<script>
+
+    let isAdmin2 = localStorage.getItem("isAdmin");
+    if(!isAdmin2 || isAdmin2 == "false") {
+        window.location.href = "/user/login";
+
+    }
+  document.addEventListener( 'submit', ( e ) => {
+        e.preventDefault();
+
+            if(document.querySelector( 'input[name="firstName"]' ).value && 
+                document.querySelector( 'input[name="lastName"]' ).value &&
+                document.querySelector( 'input[name="profession"]' ).value && 
+                document.querySelector( 'input[name="linkedin"]' ).value && 
+                document.querySelector( 'input[name="email"]' ).value) {
+                    let userId = localStorage.getItem("userId");
+                    fetch( '/api/workers', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify( {
+                            firstName: document.querySelector( 'input[name="firstName"]' ).value,
+                            lastName: document.querySelector( 'input[name="lastName"]' ).value,
+                            profession: document.querySelector( 'input[name="profession"]' ).value,
+                            linkedin: document.querySelector( 'input[name="linkedin"]' ).value,
+                            email: document.querySelector( 'input[name="email"]' ).value,
+                            user: userId
+                        } )        
+                    } ).then( async res => {
+                        window.location.href = "/addfreelancer";
+                        alert('Freelancer added!');
+                    }, err => {
+                        console.log("error: "+ err)
+                    });
+                }else {
+                    alert('You must inform all values!')
+                }
+        
+    } );
+
+</script>

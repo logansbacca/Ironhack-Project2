@@ -1,5 +1,5 @@
 <div class="container">
-        <h1 class="m-3"> Here is a list of our Freelanceres</h1>
+        <h1 class="m-3"> Here is a list of our Freelanceres:</h1>
 
         {{#each workers}}
         <div class="card m-3" style="width: 18rem; float:left;">
@@ -16,12 +16,20 @@
 
     </div>
         <script>
+
+          let token = localStorage.getItem("token");
+          if(!token) {
+              window.location.href = "/user/login";
+
+          }
         
             let url = '/user/profile/' + localStorage.getItem('userId');
             document.getElementById("account").setAttribute('href', url);
         
             function logout() {
                 localStorage.setItem('token', '');
+                localStorage.setItem('userId', '');
+                localStorage.setItem('isAdmin', '');
                 window.location.href = "/user/login";
             }  
         

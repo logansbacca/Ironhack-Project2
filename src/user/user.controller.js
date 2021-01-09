@@ -34,7 +34,10 @@ exports.getUsers = async (req,res) => {
 
 exports.createUser = async (req,res) => {
     try{
-        var user =  req.body;
+        let { email, userName, password } = req.body;
+        var user =  {
+            email, userName, password
+        };
         const newUser = await User.create(user);
         newUser.password = undefined;
 
@@ -51,7 +54,11 @@ exports.createUser = async (req,res) => {
 exports.updateUser = async (req,res) => {
     try{
         const userId = req.params.id;
-        const user = req.body;
+        var user =  {
+            email: req.body.email,
+            userName: req.body.userName,
+            password: req.body.password
+        };
         user.password = await bcrypt.hashSync(user.password, bcrypt.genSaltSync(10))
         const userUpdated = await User.findByIdAndUpdate(mongoose.Types.ObjectId(userId), {$set: user}, {new:true}); 
         if(userUpdated) {
@@ -79,7 +86,7 @@ exports.delete = async (req,res) =>{
 };
 
 function generateToken (params = {}) { 
-   return jwt.sign({params}, config.secret, {expiresIn: '15s'})
+   return jwt.sign({params}, config.secret, {expiresIn: 123123123123})
 };
 
 exports.loginUser = async (req,res) => {
@@ -94,7 +101,7 @@ exports.loginUser = async (req,res) => {
             return res.status(400).send({message:"invalid password"});
         }
         user.password = "";
-        return res.send({message: "login sucessful", data: user, token: generateToken({id: user._Id})})
+        return res.send({message: "login sucessful", data: user, token: generateToken({id: user._id})})
     } catch (error) {
         return res.status(400).send({message: error.message})
         

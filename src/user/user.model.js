@@ -17,6 +17,11 @@ const UserSchema = new Schema ({
         required: true,
         unique: [true, "The email is required"],
     },
+    admin: {
+        type: Boolean,
+        required: false,
+        default: false,
+    },
 });
 
 
